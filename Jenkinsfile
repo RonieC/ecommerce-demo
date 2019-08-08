@@ -57,11 +57,11 @@ stage("stage master") {
 						    highlightStage("Descargar codigo fuente")
                 checkout scm
         				println "Mi primer stage. MyKeyID value es: ${MyKeyID}"
-                bat """
-				npm install
-				npm test
-				"""
-				bat 'sonar-scanner.bat -D"sonar.projectKey=ecommerce" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.login=d4aabceec65d97a5205f67f830b000a2d1e0b19a"'
+               // bat """
+				//npm install
+				//npm test
+				//"""
+				//bat 'sonar-scanner.bat -D"sonar.projectKey=ecommerce" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.login=d4aabceec65d97a5205f67f830b000a2d1e0b19a"'
           		}
         	}
     	}
@@ -116,6 +116,6 @@ stage("stage master") {
 
 def highlightStage(stageName) {
 	//ansiColor('xterm') {
-		echo "\033[42m  +++++++++++++++++++ ${stageName} Stage +++++++++++++++++++ \033[0m"
+		//echo "\033[42m  +++++++++++++++++++ ${stageName} Stage +++++++++++++++++++ \033[0m"
 	//}
 }
