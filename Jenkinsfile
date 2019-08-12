@@ -14,10 +14,14 @@ pipeline {
           		node {
                       timestamps  {
                           println "Descargar codigo fuente"
-                          checkout scm
-                          bat """
-                                npm install
-                            """
+			      dir("myFolder") {
+				      checkout scm
+				  bat """
+					npm install
+				    """
+			      }
+			      stash name: "myFolder", include: "myFolder/**"
+                          
                       }
         			
           		}
@@ -29,7 +33,12 @@ pipeline {
     	steps {
     		script {
           		node {
-        			println "Mi segundo stage esta en ejecucion. KeyID: $MyKeyID"
+        			unstash "${stashName}"
+				dir("myFolder") {
+        			 bat """
+					npm start
+				    """	
+				}
           		}
         	}
     	}
