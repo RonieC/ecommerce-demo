@@ -14,20 +14,20 @@ pipeline {
           		node {
                       timestamps  {
                           println "Descargar codigo fuente"
-			      dir("myFolder") {
-				      checkout scm
+			  dir("myFolder") {
+				  checkout scm
 				  bat """
 					npm install
 				    """
-			      }
-			      stash name: "myFolder", include: "myFolder/**"
-                          
+			  }
+			    stash name: "myFolder", include: "myFolder/**"
                       }
         			
           		}
         	}
     	}
 	}
+		
 		
 	stage('Analisis de codigo con Sonar') {
     	steps {
@@ -51,7 +51,7 @@ pipeline {
     	steps {
     		script {
           		node {
-        			unstash "${stashName}"
+				unstash "${stashName}"
 				dir("myFolder") {
         			 bat """
 					npm start
