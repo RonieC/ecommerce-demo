@@ -38,7 +38,7 @@ pipeline {
 				dir("myFolder") {
         			 bat """
 				 	dir
-					sonar-scanner.bat -Dproject.settings=./sonar-project.properties
+					sonar-scanner.bat
 				    """	
 				}
                       }
