@@ -19,8 +19,8 @@ pipeline {
     	steps {
     		script {
           		node {
-				docker.withRegistry('https://registry.hub.docker.com/',"DockerHubCredential2") {
-					docker.image('98640321id/primer-docker:mi-etiqueta5test').inside("-u root:root") {
+				docker.withRegistry('https://registry.hub.docker.com/',"xxroniexx") {
+					docker.image('xxroniexx/myfirstdocker:pipeline').inside("-u root:root") {
 					      timestamps  {
 						  println "Descargar codigo fuente"
 							  dir("myFolder") {
@@ -46,8 +46,8 @@ pipeline {
 		steps {
 			script {
 				node {
-					docker.withRegistry('https://registry.hub.docker.com/',"DockerHubCredential2") {
-						docker.image('98640321id/primer-docker:mi-etiqueta5test').inside("-u root:root") {
+					docker.withRegistry('https://registry.hub.docker.com/',"xxroniexx") {
+						docker.image('9xxroniexx/myfirstdocker:pipeline').inside("-u root:root") {
 						      timestamps  {
 							  unstash "myFolder"
 								dir("anotherFolder") {
@@ -69,8 +69,8 @@ pipeline {
 		steps {
 			script {
 				node {
-					docker.withRegistry('https://registry.hub.docker.com/',"DockerHubCredential2") {
-						docker.image('98640321id/primer-docker:mi-etiqueta5test').inside("-u root:root") {
+					docker.withRegistry('https://registry.hub.docker.com/',"xxroniexx") {
+						docker.image('xxroniexx/myfirstdocker:pipeline').inside("-u root:root") {
 						      timestamps  {
 							  unstash "myFolder"
 								dir("myFolder") {
@@ -94,8 +94,8 @@ pipeline {
     	steps {
     		script {
           		node {
-				docker.withRegistry('https://registry.hub.docker.com/',"DockerHubCredential2") {
-					docker.image('98640321id/primer-docker:mi-etiqueta5test').inside("-u root:root") {
+				docker.withRegistry('https://registry.hub.docker.com/',"xxroniexx") {
+					docker.image('xxroniexx/myfirstdocker:pipeline').inside("-u root:root") {
 						unstash "${stashName}"
 						dir("myFolder") {
 						 sh """
