@@ -47,7 +47,7 @@ pipeline {
 			script {
 				node {
 					docker.withRegistry('https://registry.hub.docker.com/',"xxroniexx") {
-						docker.image('9xxroniexx/myfirstdocker:pipeline').inside("-u root:root") {
+						docker.image('xxroniexx/myfirstdocker:pipeline').inside("-u root:root") {
 						      timestamps  {
 							  unstash "myFolder"
 								dir("anotherFolder") {
