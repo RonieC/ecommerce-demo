@@ -53,7 +53,7 @@ pipeline {
     							
     						
     				  		}
-						stash name: "${folderTrabajo}", include: "${folderTrabajo}/**",  excludes: 'node_modules/**'
+						//stash name: "${folderTrabajo}", include: "${folderTrabajo}/**",  excludes: 'node_modules/**'
     					}
             			
               		}
@@ -71,10 +71,10 @@ pipeline {
 						//docker.image('98640321id/nodejs:pipeline').inside("-u root:root") {
 							//ws {
     						      timestamps  {
-							      unstash "${folderTrabajo}"
-							      sh "pwd"
-							      sh "ls"
+							      //unstash "${folderTrabajo}"
+							      
 							      dir("${folderTrabajo}") {
+								      checkout scm
     								 sh """
     								 	echo "Analisis de codigo con Sonar"
     									pwd
