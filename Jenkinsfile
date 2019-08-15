@@ -2,13 +2,13 @@
 
 pipeline {
 
-	agent none
+	//agent none
 	
-	//agent {
-	    //node {
-		//label 'nombre-Nodo'
-	    //}
-	//}
+	agent {
+	    node {
+		label 'master'
+	    }
+	}
 
 	environment {
 	    MyKeyID="myCustomValue1"
@@ -28,7 +28,7 @@ pipeline {
     					docker.image('xxroniexx/myfirstdocker:pipeline').inside("-u root:root") {
 							timestamps  {
     						  println "Descargar codigo fuente"
-							  	dir("myFolder") {
+							  	dir("$folderTrabajo") {
     								  
 	    							def secret;
 	    							withCredentials([string(credentialsId: "AccessTokenPrueba", variable: "AccessToken")]) {
@@ -53,7 +53,7 @@ pipeline {
     							
     						
     				  		}
-    				   		 stash name: "myFolder", include: "myFolder/**"
+						//stash name: "${folderTrabajo}", include: "${folderTrabajo}/**",  excludes: 'node_modules/**'
     					}
             			
               		}
@@ -67,24 +67,28 @@ pipeline {
     			script {
     				node {
     					docker.withRegistry('https://registry.hub.docker.com/',"xxroniexx") {
-    						docker.image('xxroniexx/myfirstdocker:pipeline').inside("-u root:root") {
-							    //ws {
-    						    timestamps  {
-                                    unstash "${folderTrabajo}"
-                                    sh "pwd"
-                                    sh "ls"
-                                        dir("${folderTrabajo}") {
-                                        sh """
-                                            echo "Analisis de codigo con Sonar"
-                                            pwd
-                                            sonar-scanner --version
-                                            """	
-                                        }    						      		
-							    }
+    						docker.image('98640321id/sonar_cli:scanner').inside("-u root:root") {
+						//docker.image('98640321id/nodejs:pipeline').inside("-u root:root") {
+							//ws {
+    						      timestamps  {
+							      //unstash "${folderTrabajo}"
+							      
+							      dir("${folderTrabajo}") {
+								      checkout scm
+    								 sh """
+    								 	echo "Analisis de codigo con Sonar"
+    									pwd
+									ls
+									/tmp/sonar-scanner-3.0.2.768/bin/sonar-scanner --version
+									/tmp/sonar-scanner-3.0.2.768/bin/sonar-scanner
+    								    """	
+    								}
+    						      		
+							}
     						}
     					}
 
-    			    }
+    				}
     			}
     		}
     	} // "Cerrar Analisis de codigo con Sonar"
@@ -118,8 +122,8 @@ pipeline {
         // 	steps {
         // 		script {
         //       		node {
-    	// 			docker.withRegistry('https://registry.hub.docker.com/',"DockerHubCredential2") {
-    	// 				docker.image('98640321id/nodejs:pipeline').inside("-u root:root") {
+    	// 			docker.withRegistry('https://registry.hub.docker.com/',"xxroniexx") {
+    	// 				docker.image('xxroniexx/myfirstdocker:pipeline').inside("-u root:root") {
     	// 					unstash "${stashName}"
     	// 					dir("myFolder") {
     	// 					 sh """
@@ -142,6 +146,7 @@ post {
 
 	 			node {
 	 				echo "Ejecutando function always post."
+					cleanWs()
 	 				}
 	 			}
         }
