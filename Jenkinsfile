@@ -122,8 +122,8 @@ pipeline {
         // 	steps {
         // 		script {
         //       		node {
-    	// 			docker.withRegistry('https://registry.hub.docker.com/',"xxroniexx") {
-    	// 				docker.image('xxroniexx/myfirstdocker:pipeline').inside("-u root:root") {
+    	// 			docker.withRegistry('https://registry.hub.docker.com/',"DockerHubCredential2") {
+    	// 				docker.image('98640321id/nodejs:pipeline').inside("-u root:root") {
     	// 					unstash "${stashName}"
     	// 					dir("myFolder") {
     	// 					 sh """
