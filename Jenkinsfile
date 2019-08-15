@@ -1,3 +1,15 @@
+Skip to content
+ JlccX / ecommerce-demo
+Sign up
+Code  Pull requests 1  Projects 0  Security  Pulse
+Join GitHub today
+GitHub is home to over 40 million developers working together to host and review code, manage projects, and build software together.
+
+ecommerce-demo/Jenkinsfile
+@JlccX JlccX anadir el path completo del sonar-scanner
+1326a15 14 seconds ago
+169 lines (139 sloc)  4.04 KB
+    
 #!groovy
 
 pipeline {
@@ -67,7 +79,7 @@ pipeline {
     			script {
     				node {
     					docker.withRegistry('https://registry.hub.docker.com/',"xxroniexx") {
-    						docker.image('xxroniexx/myfirstdocker:pipeline').inside("-u root:root") {
+    						docker.image('98640321id/sonar_cli:scanner').inside("-u root:root") {
 						//docker.image('98640321id/nodejs:pipeline').inside("-u root:root") {
 							//ws {
     						      timestamps  {
@@ -78,7 +90,7 @@ pipeline {
     								 sh """
     								 	echo "Analisis de codigo con Sonar"
     									pwd
-										sonar-scanner --version
+									/tmp/sonar-scanner-3.0.2.768/bin/sonar-scanner --version
     								    """	
     								}
     						      		
