@@ -67,22 +67,23 @@ pipeline {
     				node {
     					docker.withRegistry('https://registry.hub.docker.com/',"xxroniexx") {
     						docker.image('xxroniexx/myfirstdocker:pipeline').inside("-u root:root") {
-							ws {
-    						      timestamps  {
-    							  unstash "myFolder"
-    								dir("anotherFolder") {
-    								 sh """
-    								 	echo "Analisis de codigo con Sonar"
-    									pwd
-										sonar-scanner --version
-    								    """	
-    								}
-    						      }
-							}
+							    
+    						    timestamps  {
+                                    unstash "${folderTrabajo}"
+                                    sh "pwd"
+                                    sh "ls"
+                                        dir("${folderTrabajo}") {
+                                        sh """
+                                            echo "Analisis de codigo con Sonar"
+                                            pwd
+                                            sonar-scanner --version
+                                            """	
+                                        }    						      		
+							    }
     						}
     					}
 
-    				}
+    			    }
     			}
     		}
     	} // "Cerrar Analisis de codigo con Sonar"
