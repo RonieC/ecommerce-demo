@@ -12,6 +12,7 @@ pipeline {
 
 	environment {
 	    MyKeyID="myCustomValue1"
+		folderTrabajo="MiCarpeta-${BUILD_ID}"
 	}
 	
 	stages {
